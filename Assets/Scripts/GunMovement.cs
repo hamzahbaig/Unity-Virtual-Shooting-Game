@@ -95,7 +95,7 @@ public class GunMovement : MonoBehaviour
             DieEnemy dieEnemy = collision.GetComponent<DieEnemy>();
             dieEnemy.TakeDamage(1);
             level1.bulletDistance = 0;
-            Destroy(gameObject);
+            
         }
     }
 

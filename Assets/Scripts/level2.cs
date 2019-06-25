@@ -21,21 +21,30 @@ public class level2 : MonoBehaviour
     {
         if(!GameFinished)
         {
-            if (currentTurn >= turns.Length)
-            {
-                GameFinished = true;
-            }
+            // when its first turn  
             if (firstTurn)
             {
                 turnByTurnAudio(turns[currentTurn]);
             }
+            // when audio is not playing 
+            //1) game is GameFinished 
+            //  or 
+            //2) generate another enemy
             else if (currentAudio.enabled == false)
             {
+                if (currentTurn == turns.Length)
+                {
+                    GameFinished = true;
+                } else
+                {
+                    turnByTurnAudio(turns[currentTurn]);
 
-                turnByTurnAudio(turns[currentTurn]);
+                }
             }
+            // audio is playing 
             else if (currentAudio.enabled == true)
             {
+
                 if (index == 0)
                 {
                     float step = 1.0f * Time.deltaTime; // calculate distance to move
