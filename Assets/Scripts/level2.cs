@@ -10,7 +10,7 @@ public class level2 : MonoBehaviour
     private bool firstTurn = true;
     private int index;
     public int enemies;
-    private int[] turns = { 1, 0, 0, 0, 2, 0 };
+    private int[] turns = { 0, 0, 0, 0, 2, 0 };
     private int currentTurn = 0;
     public static float bulletDistance = 0.0f;
     public GameObject Gun;

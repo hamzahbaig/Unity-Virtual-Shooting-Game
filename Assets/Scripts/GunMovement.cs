@@ -78,6 +78,7 @@ public class GunMovement : MonoBehaviour
             
 
         }
+        
         ChechShoot();
         
 
@@ -85,6 +86,14 @@ public class GunMovement : MonoBehaviour
         GunRotation();
        
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Enemy1")
+        {
+            currentMiss++;
+        }
+    }
+
     void changeScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
