@@ -86,9 +86,9 @@ public class GunMovement : MonoBehaviour
         GunRotation();
        
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Enemy1")
+        if (collision.gameObject.name ==  "Enemy1")
         {
             currentMiss++;
         }
