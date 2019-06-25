@@ -53,7 +53,7 @@ public class GunMovement : MonoBehaviour
         
         if (Physics2D.Raycast(transform.position,transform.up, 10))
         {
-            Handheld.Vibrate();
+           // Handheld.Vibrate();
         }
         
         // Adjust the gun after 2 secs.
@@ -86,8 +86,9 @@ public class GunMovement : MonoBehaviour
         GunRotation();
        
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        print(collision.gameObject.name);
         if (collision.gameObject.name == "Enemy1")
         {
             currentMiss++;
