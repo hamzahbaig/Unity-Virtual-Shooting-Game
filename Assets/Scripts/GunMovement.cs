@@ -98,6 +98,15 @@ public class GunMovement : MonoBehaviour
 >>>>>>> 78cdacf6c38253ca77d5cca563be7dd173c8861a
         {
             currentMiss++;
+            //AudioSource currentAud = collision.gameObject.GetComponent<AudioSource>();
+            //currentAud.enabled = false;
+            //SpriteRenderer currentObject = collision.gameObject.GetComponent<SpriteRenderer>();
+            //currentObject.color = Color.white;
+            DieEnemy dieEnemy = collision.GetComponent<DieEnemy>();
+            dieEnemy.TakeDamage(1);
+            
+
+
         }
     }
 
