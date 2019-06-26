@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - GunMovement
     - Instructionsound
     - level1
+    - level2
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
@@ -17,7 +18,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/Scenes/Level1.unity:
+    Assets/Scenes/Level2.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -69,7 +70,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10616}
     - Class: 114
-      Script: {instanceID: 11054}
+      Script: {instanceID: 10710}
+    - Class: 114
+      Script: {instanceID: 11056}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -95,7 +98,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: c823397b4e084b1d18a114fbe43e4544
+      Hash: 2b3298e290ab4bdc60e444bb2b331e44
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Bullet
@@ -1145,6 +1148,12 @@ ScriptsOnlyBuild:
     className: level1
   - hash:
       serializedVersion: 2
+      Hash: 0263f96227e17dc5d6c3eb06c5748f0f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: level2
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1601,7 +1610,7 @@ ScriptsOnlyBuild:
     className: WireframeTrackableEventHandler
   - hash:
       serializedVersion: 2
-      Hash: e06278b697231f255b066b6bd35b8489
+      Hash: af314c5d79d93705197efa49af7b82ed
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunMovement
@@ -1613,5 +1622,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 13
   scenePathNames:
-  - Assets/Scenes/Level1.unity
+  - Assets/Scenes/Level2.unity
   playerPath: C:/Users/Hamzah Baig/Desktop/VR_2/VR_1.apk

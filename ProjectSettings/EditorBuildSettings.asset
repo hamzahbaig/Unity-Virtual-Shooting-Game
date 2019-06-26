@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GyroMode.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: 6bf41b89b37adf1498bc33ac69d47860
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: fbb4dc528afd565409d61995bec1dda1
   m_configObjects: {}

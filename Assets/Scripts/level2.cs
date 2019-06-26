@@ -16,6 +16,7 @@ public class level2 : MonoBehaviour
     public GameObject Gun;
     private Transform EnemyIntialPosition;
     private bool GameFinished = false;
+    private AudioSource beepSource;
 
     void Update()
     {
@@ -47,7 +48,9 @@ public class level2 : MonoBehaviour
 
                 if (index == 0)
                 {
-                    float step = 1.0f * Time.deltaTime; // calculate distance to move
+                    //beepSource.volume += 0.1f;
+                    currentAudio.volume += 0.1f;
+                    float step = 0.5f * Time.deltaTime; // calculate distance to move
                     currentObject.position = Vector3.MoveTowards(currentObject.position, Gun.transform.position, step);
                 }
             }
@@ -59,7 +62,7 @@ public class level2 : MonoBehaviour
     private void turnByTurnAudio(int cond)
     {
       
-        
+          
         currentTurn++;
         index = cond;
         firstTurn = false;
@@ -70,6 +73,20 @@ public class level2 : MonoBehaviour
         currentAudio = currentObject.GetComponent<AudioSource>();
         currentAudio.enabled = true;
         currentAudio.Play();
+        if(cond == 0)
+        {
+           // AudioSource[] sources = currentObject.gameObject.GetComponents<AudioSource>();
+            
+            //foreach(AudioSource audioSource in sources)
+          //  {
+           //     if(audioSource.name == "beep")
+           //     {
+            //        audioSource.enabled = true;
+           //         audioSource.Play();
+                    //beepSource = audioSource;
+            //    }
+           //}
+        }
     }
 
     private void randomAudio(int cond)

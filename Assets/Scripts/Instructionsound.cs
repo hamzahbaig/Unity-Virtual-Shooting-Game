@@ -6,17 +6,35 @@ public class Instructionsound : MonoBehaviour
 {
     public AudioSource Instructions;
     public GameObject  Gun;
+    private bool flag;
     // Start is called before the first frame update
     void Start()
     {
+        flag = true;
         Instructions.Play();
         Invoke("makeActive", 10.0f);
     }
     void makeActive()
-    {
-        Gun.SetActive(true);
-        Destroy(this.gameObject);
+    {   if(flag)
+        {
+            Gun.SetActive(true);
+            Destroy(this.gameObject);
+            flag = false;
+        }
+        
     }
 
-   
+    void Update()
+    {
+        if(Input.touchCount ==1)
+        {
+            if(Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                this.gameObject.GetComponent<AudioSource>().Pause();
+                Instructions.Pause();
+                makeActive();
+                flag = false;
+            }
+        }
+    }
 }
