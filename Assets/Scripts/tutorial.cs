@@ -8,31 +8,53 @@ public class tutorial : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameObject sound;
+    public AudioSource beepsound;
     //public int nextScreenIndex;
     private bool flag = false;
     void Start()
     {
-        Introduction.timesPlayed++;
-        if(Introduction.timesPlayed < 2)
+        Progress.levelFinished = 2;
+        if (Progress.levelFinished == 1)
         {
-            Invoke("sound1", 9.50f);
-            Invoke("sound2", 19.0f);
-            Invoke("sound3", 28.0f);
-            if (SoundOnTap.Classic == 2)
+            Introduction.timesPlayed++;
+            if (Introduction.timesPlayed < 2)
             {
-                Invoke("sound4", 37.0f);
-                Invoke("NextScreen", 55.0f);
+                Invoke("sound1", 9.50f);
+                Invoke("sound2", 19.0f);
+                Invoke("sound3", 28.0f);
+                if (SoundOnTap.Classic == 2)
+                {
+                    Invoke("sound4", 37.0f);
+                    Invoke("NextScreen", 55.0f);
+                }
+                if (SoundOnTap.Tap == 2)
+                {
+                    Invoke("sound5", 37.0f);
+                    Invoke("NextScreen", 45.0f);
+                }
             }
-            if (SoundOnTap.Tap == 2)
+            else
             {
-                Invoke("sound5", 37.0f);
-                Invoke("NextScreen", 45.0f);
+                flag = true;
             }
         }
-        else
+        if (Progress.levelFinished == 2)
         {
-            flag = true;
+            this.gameObject.GetComponent<AudioSource>().enabled = false; 
+            sound = this.gameObject.transform.GetChild(2).gameObject;
+            sound.SetActive(true);
+            AudioSource[] sounds = sound.gameObject.GetComponents<AudioSource>();
+            foreach(AudioSource s in sounds)
+            {
+                s.enabled = false;
+            }
+           
+            beepsound.Play();
+            
+
+
         }
+        
         
         
       
@@ -78,6 +100,12 @@ public class tutorial : MonoBehaviour
     }
     private void Update()
     {
+        if(Progress.levelFinished == 2)
+        {
+            float step = 0.5f * Time.deltaTime;
+            sound.transform.position = Vector3.MoveTowards(sound.transform.position, new Vector3(0.0f, 0.1900001f, 0.0f), step);
+        }
+
         if(Input.touchCount == 1)
         {
             flag = true;
