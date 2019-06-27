@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Introduction.cs" />
     <Compile Include="Assets\Scripts\level1.cs" />
     <Compile Include="Assets\Scripts\level2.cs" />
+    <Compile Include="Assets\Scripts\Progress.cs" />
     <Compile Include="Assets\Scripts\SoundOnTap.cs" />
     <Compile Include="Assets\Scripts\Sounds.cs" />
     <Compile Include="Assets\Scripts\touchPosition.cs" />

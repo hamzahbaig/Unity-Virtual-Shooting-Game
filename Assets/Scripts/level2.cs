@@ -14,62 +14,39 @@ public class level2 : MonoBehaviour
     private int index;
     public int enemies;
     private int[] turns = { 1, 0, 2, 1, 2, 0 };
-    private int currentTurn = 0;
+    private int currentTurn;
     public static float bulletDistance = 0.0f;
     public GameObject Gun;
     private Transform EnemyIntialPosition;
-    private bool GameFinished = false;
+    private bool GameFinished;
     private AudioSource beepSource;
     public Stopwatch timer;
     public static int score;
     public  AudioSource threeStars;
     public  AudioSource twoStars;
     public  AudioSource oneStar;
-    private bool checkScore = false;
+    private bool checkScore;
+    
 
     void Start()
     {
-        timer = new Stopwatch();
-        timer.Start();
+        InitalisingValues();
     }
+
     void Update()
     {
         if(!GameFinished)
         {
-            ///print(timer.Elapsed.Seconds);
-            // when its first turn  
-            if (firstTurn)
+            // check whats the progress of the user!!
+            if(Progress.levelFinished == 2)
             {
-                
-                turnByTurnAudio(turns[currentTurn]);
+                // Play Level2
+                level2Initate();
             }
-            // when audio is not playing 
-            //1) game is GameFinished 
-            //  or 
-            //2) generate another enemy
-            else if (currentAudio.enabled == false)
+            else if(Progress.levelFinished == 1)
             {
-                if (currentTurn == turns.Length)
-                {
-                    GameFinished = true;
-                    checkScore = true;
-                } else
-                {
-                    turnByTurnAudio(turns[currentTurn]);
-
-                }
-            }
-            // audio is playing 
-            else if (currentAudio.enabled == true)
-            {
-
-                if (index == 0)
-                {
-                    //beepSource.volume += 0.1f;
-                    currentAudio.volume += 0.1f;
-                    float step = 0.5f * Time.deltaTime; // calculate distance to move
-                    currentObject.position = Vector3.MoveTowards(currentObject.position, Gun.transform.position, step);
-                }
+                // Play Level1
+                level1Initate();
             }
         }
         else if(checkScore)
@@ -82,29 +59,103 @@ public class level2 : MonoBehaviour
 
 
     }
+
+    public void InitalisingValues()
+    {
+        timer = new Stopwatch();
+        timer.Start();
+        firstTurn = true;
+        currentTurn = 0;
+        GameFinished = false;
+        checkScore = false;
+    }
+
+    public void level1Initate()
+    {
+       if (firstTurn)
+        {
+            turnByTurnAudio(turns[currentTurn]);
+        }
+        else if (currentAudio.enabled == false)
+        {
+            if (currentTurn == turns.Length)
+            {
+                GameFinished = true;
+                checkScore = true;
+            }
+            else
+            {
+                turnByTurnAudio(turns[currentTurn]);
+
+            }
+        }
+    }
+
+    public void level2Initate()
+    {
+        ///print(timer.Elapsed.Seconds);
+        // when its first turn  
+        if (firstTurn)
+        {
+
+            turnByTurnAudio(turns[currentTurn]);
+        }
+        // when audio is not playing 
+        //1) game is GameFinished 
+        //  or 
+        //2) generate another enemy
+        else if (currentAudio.enabled == false)
+        {
+            if (currentTurn == turns.Length)
+            {
+                GameFinished = true;
+                checkScore = true;
+            }
+            else
+            {
+                turnByTurnAudio(turns[currentTurn]);
+
+            }
+        }
+        // audio is playing 
+        else if (currentAudio.enabled == true)
+        {
+
+            if (index == 0)
+            {
+                //beepSource.volume += 0.1f;
+                currentAudio.volume += 0.1f;
+                float step = 0.5f * Time.deltaTime; // calculate distance to move
+                currentObject.position = Vector3.MoveTowards(currentObject.position, Gun.transform.position, step);
+            }
+        }
+    }
     public  void computeScore()
     {
         
         if (score <= 15)
         {
             threeStars.Play();
-            print("***");
+            Progress.levelFinished++;
+            InitalisingValues();
         }
         else if (score <= 20)
         {
             twoStars.Play();
-            print("**");
+            Progress.levelFinished++;
+            InitalisingValues();
         }
         else if (score <= 25)
         {
             oneStar.Play();
+            Progress.levelFinished++;
+            InitalisingValues();
         }
         else if (score > 25)
         {
             // level failed audio and restart
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            print("failed");
         }
     }
     private void turnByTurnAudio(int cond)

@@ -34,9 +34,12 @@ public class DieEnemy : MonoBehaviour {
         health=1;
         this.transform.position = Position;
         this.gameObject.SetActive(false);
-
+        //Invoke("setFalse", 1.0f);
 
     }
-
+    void setFalse()
+    {
+        this.gameObject.SetActive(false);
+    }
     
 }

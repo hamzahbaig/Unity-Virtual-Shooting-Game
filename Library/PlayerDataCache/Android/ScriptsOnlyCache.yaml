@@ -1148,7 +1148,7 @@ ScriptsOnlyBuild:
     className: level1
   - hash:
       serializedVersion: 2
-      Hash: 0263f96227e17dc5d6c3eb06c5748f0f
+      Hash: f5cdda9b0f3db5e4a17bfb95b45d40c2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: level2
@@ -1620,6 +1620,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Progress
   platform: 13
   scenePathNames:
   - Assets/Scenes/Level2.unity
