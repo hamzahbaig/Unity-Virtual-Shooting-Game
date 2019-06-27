@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using UnityEngine.SceneManagement;
+
 
 public class level2 : MonoBehaviour
 {
@@ -17,14 +20,27 @@ public class level2 : MonoBehaviour
     private Transform EnemyIntialPosition;
     private bool GameFinished = false;
     private AudioSource beepSource;
+    public Stopwatch timer;
+    public static int score;
+    public  AudioSource threeStars;
+    public  AudioSource twoStars;
+    public  AudioSource oneStar;
+    private bool checkScore = false;
 
+    void Start()
+    {
+        timer = new Stopwatch();
+        timer.Start();
+    }
     void Update()
     {
         if(!GameFinished)
         {
+            ///print(timer.Elapsed.Seconds);
             // when its first turn  
             if (firstTurn)
             {
+                
                 turnByTurnAudio(turns[currentTurn]);
             }
             // when audio is not playing 
@@ -36,6 +52,7 @@ public class level2 : MonoBehaviour
                 if (currentTurn == turns.Length)
                 {
                     GameFinished = true;
+                    checkScore = true;
                 } else
                 {
                     turnByTurnAudio(turns[currentTurn]);
@@ -55,10 +72,41 @@ public class level2 : MonoBehaviour
                 }
             }
         }
-        
+        else if(checkScore)
+        {
+            timer.Stop();
+            score = timer.Elapsed.Seconds;
+            computeScore();
+            checkScore = false;
+        }
+
 
     }
+    public  void computeScore()
+    {
+        
+        if (score <= 15)
+        {
+            threeStars.Play();
+            print("***");
+        }
+        else if (score <= 20)
+        {
+            twoStars.Play();
+            print("**");
+        }
+        else if (score <= 25)
+        {
+            oneStar.Play();
+        }
+        else if (score > 25)
+        {
+            // level failed audio and restart
 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            print("failed");
+        }
+    }
     private void turnByTurnAudio(int cond)
     {
       
@@ -73,20 +121,7 @@ public class level2 : MonoBehaviour
         currentAudio = currentObject.GetComponent<AudioSource>();
         currentAudio.enabled = true;
         currentAudio.Play();
-        if(cond == 0)
-        {
-           // AudioSource[] sources = currentObject.gameObject.GetComponents<AudioSource>();
-            
-            //foreach(AudioSource audioSource in sources)
-          //  {
-           //     if(audioSource.name == "beep")
-           //     {
-            //        audioSource.enabled = true;
-           //         audioSource.Play();
-                    //beepSource = audioSource;
-            //    }
-           //}
-        }
+       
     }
 
     private void randomAudio(int cond)

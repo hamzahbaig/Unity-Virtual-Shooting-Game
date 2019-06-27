@@ -5,6 +5,7 @@ using UnityEngine;
 public class Instructionsound : MonoBehaviour
 {
     public AudioSource Instructions;
+    public AudioSource Title;
     public GameObject  Gun;
     private bool flag;
     // Start is called before the first frame update
@@ -12,10 +13,12 @@ public class Instructionsound : MonoBehaviour
     {
         flag = true;
         Instructions.Play();
-        Invoke("makeActive", 10.0f);
+        Title.PlayDelayed(10.0f);
+        Invoke("makeActive", 13.0f);
     }
     void makeActive()
-    {   if(flag)
+    {
+        if (flag)
         {
             Gun.SetActive(true);
             Destroy(this.gameObject);

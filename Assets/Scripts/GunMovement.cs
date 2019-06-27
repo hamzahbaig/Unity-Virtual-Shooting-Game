@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GunMovement : MonoBehaviour
 {
     public Transform FirePoint;
@@ -22,7 +23,7 @@ public class GunMovement : MonoBehaviour
     public int Allowedmiss;
     private int currentMiss = 0;
     public AudioSource Shotmissed;
-    
+    public static bool allowedShoot;
 
     // Use this for initialization
     void Start()
@@ -50,10 +51,10 @@ public class GunMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Physics2D.Raycast(transform.position, transform.up, 10))
+        // Vibrate phone in enemy direction
+        if (Physics2D.Raycast(this.transform.position, this.transform.up, 10))
         {
-            // Handheld.Vibrate();
+            //Handheld.Vibrate();
         }
 
         // Adjust the gun after 2 secs.
@@ -62,7 +63,23 @@ public class GunMovement : MonoBehaviour
             GunCalibiration();
         }
 
+        // checks whether there is a miss or not
+        checkMiss();
+
         // Check the input of user every frame.. If Yes then fires the bullet
+        if(allowedShoot)
+        {
+            ChechShoot();
+
+        }
+
+        // Gyroscope implementation.
+        GunRotation();
+
+    }
+
+    void checkMiss()
+    {
         if (level1.bulletDistance > distance)
         {
             Shotmissed.Play();
@@ -78,13 +95,6 @@ public class GunMovement : MonoBehaviour
 
 
         }
-
-        ChechShoot();
-
-
-        // Gyroscope implementation.
-        GunRotation();
-
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -134,6 +144,7 @@ public class GunMovement : MonoBehaviour
             counter.text = "";
             flag = false;
             AudioManager.SetActive(true);
+            allowedShoot = true;
 
         }
         else if (count % 60 == 0)
