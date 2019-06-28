@@ -1,22 +1,19 @@
 ﻿<Properties StartupConfiguration="{886AD026-8E89-AB83-DD77-EE9EC4E23016}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Bullet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/tutorial.cs">
     <Files>
-      <File FileName="Assets/Scripts/DieEnemy.cs" Line="33" Column="28" />
-      <File FileName="Assets/Scripts/Bullet.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/level2.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GunMovement.cs" Line="105" Column="13" />
-      <File FileName="Assets/Scripts/AudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DieEnemy.cs" Line="46" Column="1" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="38" Column="1" />
+      <File FileName="Assets/Scripts/level2.cs" Line="245" Column="1" />
+      <File FileName="Assets/Scripts/GunMovement.cs" Line="159" Column="1" />
+      <File FileName="Assets/Scripts/AudioManager.cs" />
+      <File FileName="Assets/Scripts/Introduction.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/tutorial.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Progress.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Unity-Virtual-Shooting-Game" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Bullet.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Unity-Virtual-Shooting-Game" expanded="True" selected="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">

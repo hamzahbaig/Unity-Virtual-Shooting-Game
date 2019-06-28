@@ -7,10 +7,16 @@ using UnityEngine.SceneManagement;
 public class tutorial : MonoBehaviour
 {
     private GameObject sound;
+<<<<<<< HEAD
+=======
+    public AudioSource beepsound;
+    //public int nextScreenIndex;
+>>>>>>> 56fad7a7f607ab190139c1d19fa2b832ac905450
     private bool flag = false;
 
     void Start()
     {
+<<<<<<< HEAD
         //Progress.timesPlayed++;
         
         // LEVEL1 TUTORIAL
@@ -18,6 +24,13 @@ public class tutorial : MonoBehaviour
         {
             Progress.timesPlayed_1++;
             if (Progress.timesPlayed_1 < 2)
+=======
+        Progress.levelFinished = 2;
+        if (Progress.levelFinished == 1)
+        {
+            Introduction.timesPlayed++;
+            if (Introduction.timesPlayed < 2)
+>>>>>>> 56fad7a7f607ab190139c1d19fa2b832ac905450
             {
                 Invoke("sound1", 9.50f);
                 Invoke("sound2", 19.0f);
@@ -38,6 +51,7 @@ public class tutorial : MonoBehaviour
                 flag = true;
             }
         }
+<<<<<<< HEAD
         // LEVEL2 TUTORIAL
         else if(Progress.levelFinished == 2)
         {
@@ -53,6 +67,29 @@ public class tutorial : MonoBehaviour
             }
         }
           
+=======
+        if (Progress.levelFinished == 2)
+        {
+            this.gameObject.GetComponent<AudioSource>().enabled = false; 
+            sound = this.gameObject.transform.GetChild(2).gameObject;
+            sound.SetActive(true);
+            AudioSource[] sounds = sound.gameObject.GetComponents<AudioSource>();
+            foreach(AudioSource s in sounds)
+            {
+                s.enabled = false;
+            }
+           
+            beepsound.Play();
+            
+
+
+        }
+        
+        
+        
+      
+        
+>>>>>>> 56fad7a7f607ab190139c1d19fa2b832ac905450
     }
     void sound1()
     {
@@ -98,11 +135,20 @@ public class tutorial : MonoBehaviour
     }
     private void Update()
     {
+<<<<<<< HEAD
         if(Progress.levelFinished ==2)
         {
             float step = 0.5f * Time.deltaTime; // calculate distance to move
             sound.transform.position = Vector3.MoveTowards(sound.transform.position, new Vector3(0.0f, 0.1900001f, 0.0f), step);
         }
+=======
+        if(Progress.levelFinished == 2)
+        {
+            float step = 0.5f * Time.deltaTime;
+            sound.transform.position = Vector3.MoveTowards(sound.transform.position, new Vector3(0.0f, 0.1900001f, 0.0f), step);
+        }
+
+>>>>>>> 56fad7a7f607ab190139c1d19fa2b832ac905450
         if(Input.touchCount == 1)
         {
             flag = true;
