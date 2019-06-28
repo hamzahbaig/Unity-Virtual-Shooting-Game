@@ -21,11 +21,12 @@ public class level2 : MonoBehaviour
     private bool GameFinished;
     private AudioSource beepSource;
     public Stopwatch timer;
-    public static int score;
+    public  int score;
     public  AudioSource threeStars;
     public  AudioSource twoStars;
     public  AudioSource oneStar;
     private bool checkScore;
+    public AudioSource levelFailed;
     
 
     void Start()
@@ -67,6 +68,7 @@ public class level2 : MonoBehaviour
         firstTurn = true;
         currentTurn = 0;
         GameFinished = false;
+        score = 0;
         checkScore = false;
     }
 
@@ -80,6 +82,7 @@ public class level2 : MonoBehaviour
         {
             if (currentTurn == turns.Length)
             {
+                
                 GameFinished = true;
                 checkScore = true;
             }
@@ -123,7 +126,6 @@ public class level2 : MonoBehaviour
 
             if (index == 0)
             {
-                //beepSource.volume += 0.1f;
                 currentAudio.volume += 0.1f;
                 float step = 0.5f * Time.deltaTime; // calculate distance to move
                 currentObject.position = Vector3.MoveTowards(currentObject.position, Gun.transform.position, step);
@@ -137,31 +139,39 @@ public class level2 : MonoBehaviour
         {
             threeStars.Play();
             Progress.levelFinished++;
+            SceneManager.LoadScene(0);
             InitalisingValues();
         }
         else if (score <= 20)
         {
             twoStars.Play();
             Progress.levelFinished++;
+            SceneManager.LoadScene(0);
             InitalisingValues();
         }
         else if (score <= 25)
         {
             oneStar.Play();
             Progress.levelFinished++;
+            SceneManager.LoadScene(0);
             InitalisingValues();
         }
         else if (score > 25)
         {
             // level failed audio and restart
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            levelFailed.Play();
+            //invoke karna
+            Invoke("nextScene", 3.0f);
+            
         }
+    }
+    void nextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private void turnByTurnAudio(int cond)
     {
-      
-          
+
         currentTurn++;
         index = cond;
         firstTurn = false;
@@ -169,8 +179,37 @@ public class level2 : MonoBehaviour
         currentObject.gameObject.SetActive(true);
         currentSprite = currentObject.GetComponent<SpriteRenderer>();
         currentSprite.color = Color.red;
-        currentAudio = currentObject.GetComponent<AudioSource>();
-        currentAudio.enabled = true;
+        if(cond == 0 )
+        {
+            AudioSource[] sounds = currentObject.GetComponents<AudioSource>();
+            foreach (AudioSource s in sounds)
+            {
+                if (Progress.levelFinished == 1)
+                {
+                    if (s.clip.name == "final_steps")
+                    {
+                        s.enabled = true;
+                        currentAudio = s;
+                    }
+
+                }
+                if (Progress.levelFinished == 2)
+                {
+                    if (s.clip.name == "Cut_beep")
+                    {
+                        s.enabled = true;
+                        currentAudio = s;
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            currentAudio = currentObject.GetComponent<AudioSource>();
+            currentAudio.enabled = true;
+        }
+
         currentAudio.Play();
        
     }

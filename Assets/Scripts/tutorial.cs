@@ -6,37 +6,53 @@ using UnityEngine.SceneManagement;
 
 public class tutorial : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject sound;
-    //public int nextScreenIndex;
     private bool flag = false;
+
     void Start()
     {
-        Introduction.timesPlayed++;
-        if(Introduction.timesPlayed < 2)
+        //Progress.timesPlayed++;
+        
+        // LEVEL1 TUTORIAL
+        if(Progress.levelFinished == 1)
         {
-            Invoke("sound1", 9.50f);
-            Invoke("sound2", 19.0f);
-            Invoke("sound3", 28.0f);
-            if (SoundOnTap.Classic == 2)
+            Progress.timesPlayed_1++;
+            if (Progress.timesPlayed_1 < 2)
             {
-                Invoke("sound4", 37.0f);
-                Invoke("NextScreen", 55.0f);
+                Invoke("sound1", 9.50f);
+                Invoke("sound2", 19.0f);
+                Invoke("sound3", 28.0f);
+                if (SoundOnTap.Classic == 2)
+                {
+                    Invoke("sound4", 37.0f);
+                    Invoke("NextScreen", 55.0f);
+                }
+                if (SoundOnTap.Tap == 2)
+                {
+                    Invoke("sound5", 37.0f);
+                    Invoke("NextScreen", 45.0f);
+                }
             }
-            if (SoundOnTap.Tap == 2)
+            else
             {
-                Invoke("sound5", 37.0f);
-                Invoke("NextScreen", 45.0f);
+                flag = true;
             }
         }
-        else
+        // LEVEL2 TUTORIAL
+        else if(Progress.levelFinished == 2)
         {
-            flag = true;
+            Progress.timesPlayed_2++;
+            if (Progress.timesPlayed_2 < 2)
+            {
+                Invoke("movingEnemy", 9.50f);
+                Invoke("NextScreen", 30.0f);    
+            }
+            else
+            {
+                flag = true;
+            }
         }
-        
-        
-      
-        
+          
     }
     void sound1()
     {
@@ -66,8 +82,12 @@ public class tutorial : MonoBehaviour
     { 
             sound = this.gameObject.transform.GetChild(4).gameObject;
             sound.SetActive(true);
-        
-        
+    }
+    void movingEnemy()
+    {
+        sound = this.gameObject.transform.GetChild(6).gameObject;
+     
+        sound.SetActive(true);
     }
     void NextScreen()
     {
@@ -78,6 +98,11 @@ public class tutorial : MonoBehaviour
     }
     private void Update()
     {
+        if(Progress.levelFinished ==2)
+        {
+            float step = 0.5f * Time.deltaTime; // calculate distance to move
+            sound.transform.position = Vector3.MoveTowards(sound.transform.position, new Vector3(0.0f, 0.1900001f, 0.0f), step);
+        }
         if(Input.touchCount == 1)
         {
             flag = true;
@@ -94,6 +119,7 @@ public class tutorial : MonoBehaviour
 
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
+                    SceneManager.LoadScene(1);
                     if(SoundOnTap.Tap == 2)
                     {
                        // print("tap");
@@ -102,7 +128,7 @@ public class tutorial : MonoBehaviour
                     if(SoundOnTap.Classic == 2)
                     {
                         //print("Classic");
-                        SceneManager.LoadScene(3);
+                        SceneManager.LoadScene(1);
                     }
                     
                 }

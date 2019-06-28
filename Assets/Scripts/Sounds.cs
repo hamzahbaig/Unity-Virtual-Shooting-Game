@@ -9,7 +9,13 @@ public class Sounds : MonoBehaviour
     void Start()
     {
         infoSound.PlayDelayed(1.75f);
-        Invoke("setInActive", 8.0f);
+        if (Progress.levelFinished == 1)
+        {
+            Invoke("setInActive", 8.0f);
+        } else if (Progress.levelFinished == 2)
+        {
+            Invoke("setInActive", 19.0f);
+        }
     }
     void setInActive()
     {

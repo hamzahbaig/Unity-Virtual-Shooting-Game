@@ -15,13 +15,13 @@ public class GunMovement : MonoBehaviour
     private int secs = 7;
     private bool gyroEnabled;
     float offset;
-    private bool flag = true;
-    int count = 0;
+    private bool flag;
+    int count;
     public GameObject AudioManager;
     public AudioSource gunSound;
-    public static float distance = 12.0f;
+    public static float distance;
     public int Allowedmiss;
-    private int currentMiss = 0;
+    private int currentMiss;
     public AudioSource Shotmissed;
     public static bool allowedShoot;
 
@@ -31,6 +31,11 @@ public class GunMovement : MonoBehaviour
 
         counter.text = secs.ToString();
         gyroEnabled = EnableGyro();
+        currentMiss = 0;
+        flag = true;
+        secs = 7;
+        count = 0;
+        distance = 12.0f;
     }
 
     private bool EnableGyro()
